@@ -16,12 +16,19 @@ password: int = 0
 rotation.rotate(50)
 
 for line in input_file:
+    amount = int(line)
+    password += abs(amount) // 100
+    if amount > 0:
+        amount %= 100
+        rotated_values = list(rotation)[1: amount+1]
+    else:
+        amount = -100 + amount % 100
+        rotated_values = list(rotation)[amount: 101]
     rotation.rotate(-int(line))
 
-    if rotation[0] == 0:
-        password += 1
+    password += rotated_values.count(0)
 
-print(password)
+print(password) #2529
 
 end = time.perf_counter()
 print(f"time: {end - start:.4f} sec")
