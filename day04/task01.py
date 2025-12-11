@@ -4,7 +4,7 @@ import numpy as np
 
 start = time.perf_counter()
 
-name: str = "inputs/input4.0"
+name: str = "inputs/input04.0.txt"
 input_file = Reader(name).read_txt_to_str()
 input_file = input_file.split('\n')
 
@@ -61,4 +61,6 @@ for y in range(array_range):
 
 
 print(rolls)
+end = time.perf_counter()
+print(f"time: {end - start:.4f} sec")
 

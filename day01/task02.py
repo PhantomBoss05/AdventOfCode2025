@@ -4,29 +4,29 @@ import time
 
 start = time.perf_counter()
 
-name: str = "inputs/input1.0"
+name: str = "inputs/input01.0.txt"
 input_file = Reader(name).read_txt_to_str()
 input_file = input_file.replace('R', '')
 input_file = input_file.replace('L', '-')
 input_file = input_file.split("\n")
 
-rotation: deque[int] = deque(range(0, 100))
+rotation: deque[int] = deque(range(0, 100))                                                                             #creates a deque from 0 to 99
 password: int = 0
 
-rotation.rotate(50)
+rotation.rotate(50)                                                                                                     #rotates the deque 50 digits
 
 for line in input_file:
     amount = int(line)
-    password += abs(amount) // 100
-    if amount > 0:
+    password += abs(amount) // 100                                                                                      #calculates how often you pass 0
+    if amount > 0:                                                                                                      #creates a list of digits you pass when you rotate - the calculated digits (input 810 = rotates 10)
         amount %= 100
         rotated_values = list(rotation)[1: amount+1]
     else:
         amount = -100 + amount % 100
         rotated_values = list(rotation)[amount: 101]
-    rotation.rotate(-int(line))
+    rotation.rotate(-int(line))                                                                                         #rotates the deque
 
-    password += rotated_values.count(0)
+    password += rotated_values.count(0)                                                                                 #checks how often you find 0 in rotated_values
 
 print(password) #2529
 
